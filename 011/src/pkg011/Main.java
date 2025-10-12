@@ -136,7 +136,7 @@ public static int checkBinary(){
         }
         }     
      }
-     public static String  outBinary(int n  ){
+      public static String  outBinary(int n  ){
       StringBuilder sb = new StringBuilder();
       if(n ==0 ){
       return "0";
@@ -150,13 +150,36 @@ public static int checkBinary(){
       return sb.reverse().toString() ;
       }
       int x = -(n+1);
-      if(x ==0 ){
-      sb.append('0');
-      }else{
+    
       while(x>0){
-      
+      sb.append(x%2);
+      x/=2;
       }
-      }
+      String bin =  sb.reverse().toString();
+      // dem trai cho du bit 
+      int bit = bin.length() ;
+      StringBuilder pad  = new StringBuilder();
+     if(bit<8){
+     for(int i  =0 ; i<8-bit ; i++) pad.append("0");
+     pad.append(bin);
+     }
+     else if(bit<16){
+       for(int i  =0 ; i<16-bit ; i++) pad.append("0");
+     pad.append(bin);
+     }
+     else if(bit <32){
+       for(int i  =0 ; i<32-bit ; i++) pad.append("0");
+     pad.append(bin);
+     }
+     else if (bit>32){
+     bin = bin.substring(bit-32);
+     }
+     // dao bit 
+     char[] arr = bin.toCharArray() ; 
+     for(int i = 0 ; i<bin.length();i++){
+     arr[i] =(arr[i] =='0') ? '1' :'0';
+     }
+     return new String (arr);
      }
      public static int outDecimal (int n ){
      return n ;
@@ -222,4 +245,5 @@ public static int checkBinary(){
         }
     }
     
+
 
