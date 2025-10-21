@@ -1,13 +1,15 @@
-package lab8;
-import java.util.*;
+package com.mycompany.lab8;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Scanner;
 
 public class Lab8 {
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter your content: ");
         String input = sc.nextLine();
-
-        // ===== Đếm từ (như bạn đã làm) =====
         String[] tokens = input.trim().split("\\s+");
         Map<String, Integer> wordCount = new LinkedHashMap<>();
         for (String t : tokens) {
@@ -24,7 +26,7 @@ public class Lab8 {
             wordCount.put(word, wordCount.getOrDefault(word, 0) + 1);
         }
 
-        // ===== Đếm chữ cái (letters) =====
+      
         Map<Character, Integer> charCount = new LinkedHashMap<>();
         for (char c : input.toCharArray()) {
             if (Character.isLetter(c)) {
@@ -33,22 +35,13 @@ public class Lab8 {
             }
         }
 
-        // ===== Đếm KÝ TỰ ĐẶC BIỆT =====
-        // Bạn CHỌN 1 trong 3 cách dưới đây (bỏ comment cách bạn muốn dùng):
+      
 
         Map<Character, Integer> specialCount = new LinkedHashMap<>();
 
         for (char c : input.toCharArray()) {
 
-            // -------- CÁCH A: không phải chữ, không phải số, không phải khoảng trắng --------
-            /*
-            if (!Character.isLetterOrDigit(c) && !Character.isWhitespace(c)) {
-                specialCount.put(c, specialCount.getOrDefault(c, 0) + 1);
-            }
-            */
-
-            // -------- CÁCH B: chỉ đếm SYMBOLS (loại dấu câu & khoảng trắng) --------
-            /*
+           
             int t = Character.getType(c);
             boolean isSymbol =
                     t == Character.MATH_SYMBOL
@@ -58,11 +51,6 @@ public class Lab8 {
             if (isSymbol) {
                 specialCount.put(c, specialCount.getOrDefault(c, 0) + 1);
             }
-            */
-
-            // -------- CÁCH C: đếm ký tự đặc biệt nhưng BỎ "dấu" (combining mark) --------
-            // Ở đây coi "dấu" là ký tự kết hợp (Mn) – dấu thanh/điểm trên chữ.
-            // Ta đếm mọi thứ không phải chữ/số/khoảng trắng/combining mark
             int type = Character.getType(c);
             boolean isCombiningMark = (type == Character.NON_SPACING_MARK); // Mn
             if (!Character.isLetterOrDigit(c) && !Character.isWhitespace(c) && !isCombiningMark) {
@@ -83,4 +71,8 @@ public class Lab8 {
         System.out.println("Total letters: " + totalLetters);
         System.out.println("Total specials: "+ totalSpecial);
     }
-}
+    
+
+    }
+
+
