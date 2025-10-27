@@ -12,19 +12,31 @@ public class Lab8 {
         String input = sc.nextLine();
         String[] tokens = input.trim().split("\\s+");
         Map<String, Integer> wordCount = new LinkedHashMap<>();
-        for (String t : tokens) {
-            if (t.isEmpty()) continue;
+       for (String t : tokens) {
+    if (t.isEmpty()) continue;
 
-            StringBuilder sb = new StringBuilder();
-            for (char c : t.toCharArray()) {
-                if (Character.isLetterOrDigit(c)) {
-                    sb.append(Character.toLowerCase(c));
-                }
+    StringBuilder sb = new StringBuilder();
+    char[] arr = t.toCharArray();
+
+    for (int i = 0; i < arr.length; i++) {
+        char c = arr[i];
+        if (Character.isLetterOrDigit(c)) {
+            sb.append(Character.toLowerCase(c));
+        } else if (c == '-') {
+            // Cho phép '-' nếu nằm giữa 2 ký tự chữ/số
+            if (i > 0 && i < arr.length - 1 &&
+                Character.isLetterOrDigit(arr[i - 1]) &&
+                Character.isLetterOrDigit(arr[i + 1])) {
+                sb.append('-');
             }
-            String word = sb.toString();
-            if (word.isEmpty()) continue;
-            wordCount.put(word, wordCount.getOrDefault(word, 0) + 1);
         }
+    }
+
+    String word = sb.toString();
+    if (word.isEmpty()) continue;
+    wordCount.put(word, wordCount.getOrDefault(word, 0) + 1);
+}
+
 
       
         Map<Character, Integer> charCount = new LinkedHashMap<>();
@@ -74,5 +86,6 @@ public class Lab8 {
     
 
     }
+
 
 
