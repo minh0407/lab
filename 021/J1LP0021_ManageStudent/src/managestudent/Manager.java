@@ -145,22 +145,28 @@ public class Manager {
         return listStudentFindByID.get(choice);
     }
 
-    public void report() {
-        HashMap<String, Integer> reports = new HashMap<>();
-        for (Student student : students) {
-            String key= student.getId()+"#"+student.getStudentName()+"|"+student.getCourseName();
-            if(reports.containsKey(key)){
-                int total= reports.get(key);
-                reports.put(key, total+1);
-            }else{
-                 reports.put(key, 1);
-            }
-
-        }
-        for (String key : reports.keySet()) {
-            System.out.println(key.split("#")[1]+"|"+reports.get(key));
-        }
+ public void report() {
+    if (students.isEmpty()) {
+        System.out.println("No data.");
+        return;
     }
+    HashMap<String, Integer> reports = new HashMap<>();
+    for (Student student : students) {
+        String key = student.getId() + "#" + student.getStudentName() + "|" + student.getCourseName();
+        reports.put(key, reports.getOrDefault(key, 0) + 1);
+    }
+
+    System.out.printf("%-20s | %-12s | %-5s%n", "Student name", "Course", "Total");
+    for (String key : reports.keySet()) {
+        String nameAndCourse = key.split("#", 2)[1]; // "Name|Course"
+        String[] parts = nameAndCourse.split("\\|", 2);
+        String name = parts[0];
+        String course = parts[1];
+        int total = reports.get(key);
+        System.out.printf("%-20s | %-12s | %-5d%n", name, course, total);
+    }
+}
+
 
     public void generateStudent() {
         students.add(new Student("s1", "long", "fall", "Java"));
@@ -177,3 +183,4 @@ public class Manager {
     }
 
 }
+
