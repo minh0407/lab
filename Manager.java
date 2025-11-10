@@ -32,8 +32,8 @@ public class Manager {
             String lastName = validation.inputString("Enter last name:", "[A-Za-z\\s]+");
             int birthDate = validation.inputInt("Enter bithdate:", 1900,Calendar.getInstance().get(Calendar.YEAR));
             String address = validation.inputString("Enter address", ".+");
-            String phone = validation.inputString("Enrer phone:", "(0[3|5|7|8|9])+([0-9]{8})");
-            String email = validation.inputString("Enter email:", phone);
+            String phone = validation.inputString("Enrer phone:", "^(0[35789])[0-9]{8}$");
+            String email = validation.inputString("Enter email:",  "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$");
             switch (type) {
                 case 0:
                     int yearExperience = validation.inputInt("Enter year of experience:", 0, 100);
@@ -110,3 +110,4 @@ public class Manager {
         }
     }
 }
+
